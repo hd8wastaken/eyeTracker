@@ -251,8 +251,9 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        logr("interrupted", Fore.CYAN)
+        
+        logr("Keyboard Interrup, errors: {errCount}", Fore.CYAN)
     except Exception as e:
-        logr(f"FATAL: {e}", Fore.RED)
+        logr(f"Fatal :(, error: {e}", Fore.RED)
         traceback.print_exc()
         sys.exit(1)

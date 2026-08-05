@@ -1,4 +1,4 @@
-tracker
+### iTrack™
 
 a python webcam eye tracker. detects your face and moves an eye to follow you
 
