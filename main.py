@@ -3,7 +3,7 @@ import sys
 import subprocess
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-main_path = os.path.join(base_dir, "src", "main.py")
+main_path = os.path.join(base_dir, "src", "logic.py")
 
 if not os.path.isfile(main_path):
     print(f"FAIL: could not find {main_path}")
