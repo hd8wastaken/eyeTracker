@@ -142,9 +142,6 @@ def main():
     show_prev = True
     fails = 0
 
-    addons = AddonManager(log=lambda m, c=Fore.MAGENTA: logr(m, c))
-    addons.dispatch("on_start", ctx(log=logr, win_w=win_w, win_h=win_h, eyes=(left, right)))
-
     cv2.namedWindow("robot eyes", cv2.WINDOW_NORMAL)
     cv2.resizeWindow("robot eyes", win_w, win_h)
 
@@ -175,10 +172,6 @@ def main():
 
             logr(f"{'-'*60}", Fore.MAGENTA)
             logr(f"faces={len(faces)}", Fore.CYAN)
-
-            actx = ctx(log=logr, frame=frame, gray=gray, canvas=canvas, faces=len(faces),
-                       boxes=faces, win_w=win_w, win_h=win_h, eyes=(left, right), key=-1)
-            addons.dispatch("on_frame", actx)
 
             if len(faces) > 0:
                 total_w = sum(f[2] * f[3] for f in faces)
@@ -225,11 +218,8 @@ def main():
                     e.px = e.px + (tx - e.px) * 0.35
                     e.py = e.py + (ty - e.py) * 0.35
                     logr(f"  eye@({e.cx},{e.cy}) {opx:.1f},{opy:.1f} -> {e.px:.1f},{e.py:.1f}", Fore.BLUE)
-
-                addons.dispatch("on_face_found", actx)
             else:
                 logr("no face, holding last pupil position", Fore.RED)
-                addons.dispatch("on_face_lost", actx)
 
             left.draw(canvas)
             right.draw(canvas)
@@ -240,8 +230,6 @@ def main():
                 canvas[10:10 + sh, 10:10 + sw] = sm
                 cv2.rectangle(canvas, (10, 10), (10 + sw, 10 + sh), (0, 0, 0), 1)
 
-            addons.dispatch("on_draw", actx)
-
             cv2.imshow("robot eyes", canvas)
 
             k = cv2.waitKey(1) & 0xFF
@@ -249,9 +237,6 @@ def main():
                 break
             elif k == ord("f"):
                 show_prev = not show_prev
-            elif k != 255:
-                actx.key = k
-                addons.dispatch("on_key", actx)
 
             time.sleep(0.01)
 
@@ -261,7 +246,6 @@ def main():
             time.sleep(0.1)
 
     logr("shutting down", Fore.CYAN)
-    addons.dispatch("on_stop", ctx(log=logr))
     cap.release()
     cv2.destroyAllWindows()
 
