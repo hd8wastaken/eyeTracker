@@ -4,7 +4,7 @@ cd "$(dirname "$0")"
 read -p "commit message: " msg
 
 if [ -z "$msg" ]; then
-    echo "commit message cannot be empty"
+    echo "commit message cannot be empty (err)"
     exit 1
 fi
 

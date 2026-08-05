@@ -23,4 +23,4 @@ while True:
         break
 
 cv2.destroyAllWindows()
-print("PASS: window opened and closed without error")
+print("PASS: window opened and closed without error.")

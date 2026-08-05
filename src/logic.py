@@ -253,6 +253,6 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         logr("interrupted", Fore.CYAN)
     except Exception as e:
-        logr(f"fatal: {e}", Fore.RED)
+        logr(f"FATAL: {e}", Fore.RED)
         traceback.print_exc()
         sys.exit(1)

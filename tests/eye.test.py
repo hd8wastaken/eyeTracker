@@ -32,4 +32,4 @@ while True:
         break
 
 cv2.destroyAllWindows()
-print("PASS: pupil moved and stayed within bounds")
+print("PASS: pupil moved and stayed within bounds.")

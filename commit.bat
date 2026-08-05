@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
 
-set /p msg="commit message: "
+set /p msg="commit: "
 
 if "%msg%"=="" (
     echo commit message cannot be empty

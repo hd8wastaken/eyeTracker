@@ -1,7 +1,7 @@
 import cv2
 import os
 import urllib.request
-
+### FN
 fn = "haarcascade_frontalface_default.xml"
 p = os.path.join(cv2.data.haarcascades, fn)
 

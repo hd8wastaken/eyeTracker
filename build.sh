@@ -8,6 +8,6 @@ if [ $? -eq 0 ]; then
     echo "build succeeded. run it with:"
     echo "  docker run --rm -it --device=/dev/video0 tracker"
 else
-    echo "build failed"
+    echo "build failed :("
     exit 1
 fi
