@@ -95,8 +95,6 @@ class tracker:
         self.last_cy = None
         self.vel_x = 0.0
         self.vel_y = 0.0
-        self.accel_x = 0.0
-        self.accel_y = 0.0
         self.last_t = time.time()
 
     def update(self, cx, cy):
@@ -107,10 +105,8 @@ class tracker:
         if self.last_cx is not None:
             new_vel_x = (cx - self.last_cx) / dt
             new_vel_y = (cy - self.last_cy) / dt
-            self.accel_x = (new_vel_x - self.vel_x) / dt
-            self.accel_y = (new_vel_y - self.vel_y) / dt
-            self.vel_x = new_vel_x
-            self.vel_y = new_vel_y
+            self.vel_x = self.vel_x * 0.7 + new_vel_x * 0.3
+            self.vel_y = self.vel_y * 0.7 + new_vel_y * 0.3
 
         self.last_cx = cx
         self.last_cy = cy
@@ -185,12 +181,11 @@ def main():
                 logr(f"weighted center=({wcx:.1f},{wcy:.1f}) over {len(faces)} face(s)", Fore.WHITE)
 
                 dt = trk.update(wcx, wcy)
-                logr(f"dt={dt*1000:.1f}ms vel=({trk.vel_x:.1f},{trk.vel_y:.1f})px/s "
-                     f"accel=({trk.accel_x:.1f},{trk.accel_y:.1f})px/s2", Fore.YELLOW)
+                logr(f"dt={dt*1000:.1f}ms vel=({trk.vel_x:.1f},{trk.vel_y:.1f})px/s", Fore.YELLOW)
 
-                lead_t = 0.12
-                pred_x = wcx + trk.vel_x * lead_t + 0.5 * trk.accel_x * lead_t ** 2
-                pred_y = wcy + trk.vel_y * lead_t + 0.5 * trk.accel_y * lead_t ** 2
+                lead_t = 0.05
+                pred_x = wcx + trk.vel_x * lead_t
+                pred_y = wcy + trk.vel_y * lead_t
                 logr(f"predicted pos ({lead_t*1000:.0f}ms ahead)=({pred_x:.1f},{pred_y:.1f})", Fore.YELLOW)
 
                 dx = pred_x - (fw / 2.0)
@@ -215,8 +210,10 @@ def main():
 
                 for e in (left, right):
                     opx, opy = e.px, e.py
-                    e.px = e.cx + ox
-                    e.py = e.cy + oy
+                    tx = e.cx + ox
+                    ty = e.cy + oy
+                    e.px = e.px + (tx - e.px) * 0.35
+                    e.py = e.py + (ty - e.py) * 0.35
                     logr(f"  eye@({e.cx},{e.cy}) {opx:.1f},{opy:.1f} -> {e.px:.1f},{e.py:.1f}", Fore.BLUE)
             else:
                 logr("no face, holding last pupil position", Fore.RED)
