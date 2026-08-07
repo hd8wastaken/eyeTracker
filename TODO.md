@@ -1,3 +1,1 @@
-
-1. fix rendering issue ✕
-2. optimize ✕
+nothing in plan yet :p

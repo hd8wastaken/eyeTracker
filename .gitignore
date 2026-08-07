@@ -1,10 +1,14 @@
-.claude
-.claude/*
-.claude/claude
+
 
 src/__pycache__
 addons/__pycache__
 __pycache__
 
-documents/HTW-en.md
-documents/HTW-pl.md
+documents/license-old.md
+documents/readme-old.md
+
+
+
+# models
+src/haarcascade_frontalface_default.xml
+#src/models/08052026.xml # (Fallback model)

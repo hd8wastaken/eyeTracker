@@ -1,0 +1,4 @@
+opencv-python
+numpy
+colorama
+# note: if this doesnt work for u it might be because opencv is already "installed" but the version installed might not be work with my software
