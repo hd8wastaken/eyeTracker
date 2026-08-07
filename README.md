@@ -1,82 +1,97 @@
-### iTrack™
+<div align="center">
 
-a python webcam eye tracker. detects your face and moves an eye to follow you
+# eyeTrack™
+
+<img src="https://img.shields.io/badge/python-3.9+-3572A5?style=flat-square&logo=python&logoColor=white"/>
+<img src="https://img.shields.io/badge/opencv-5.0-5C3EE8?style=flat-square&logo=opencv&logoColor=white"/>
+<img src="https://img.shields.io/badge/platform-windows%20%7C%20mac%20%7C%20linux-222?style=flat-square"/>
+<img src="https://img.shields.io/badge/docker-ready-2496ED?style=flat-square&logo=docker&logoColor=white"/>
+
+**a python webcam face tracker using cascade frontalface**
+
+</div>
+
+---
 
 ## requirements
 
 - python 3.9+
-- camera over 720p
-- requirements in `requirements.txt`
+- webcam 720p or better
 
-install deps:
-
-```
+```sh
 pip install -r requirements.txt
 ```
-(to run open one of the run files; run.bat < windows, run.sh < mac / linux)
+
+to run, open one of the run files:
+
+| platform | command |
+|---|---|
+| windows | `run.bat` |
+| mac / linux | `./run.sh` |
+
+---
+
+## Basic controls:
+
+| key | action |
+|---|---|
+| `q` / `esc` | quit |
+| `f` | toggle webcam preview inset |
+
+> if no cascade file is found locally, the app will attempt to download one automatically. (If internet connection is unstable the app will use the fallback.)
+
+---
 
 ## addons
 
-drop a `.py` file in `addons/` and it gets loaded automatically at startup. define any of these
-hooks — all optional, all take a single ctx object:
+drop a `.py` file into `addons/` and it is loaded automatically at startup no registration needed.
 
-| hook | when |
+define any combination of these hooks (all optional, all receive a single `ctx` object):
+
+| hook | fires |
 |---|---|
 | `on_start(c)` | once, before the loop |
 | `on_frame(c)` | every frame, after detection |
-| `on_face_found(c)` | frames where a face was detected |
+| `on_face_found(c)` | frames where ≥1 face was detected |
 | `on_face_lost(c)` | frames where no face was detected |
-| `on_draw(c)` | after the eyes are drawn, before display |
-| `on_key(c)` | a key was pressed (`c.key`), other than q/esc/f |
+| `on_draw(c)` | after eyes are drawn, before display |
+| `on_key(c)` | a key other than `q` / `esc` / `f` was pressed |
 | `on_stop(c)` | once, on shutdown |
 
-ctx fields: `log`, `frame`, `gray`, `canvas`, `faces` (count), `boxes`, `win_w`, `win_h`, `eyes`, `key`.
-
-set `ENABLED = False` in an addon to skip it. an addon that raises is logged and the app keeps running.
-
-shipped addons:
-
-- `siren.py` — plays `src/assets/siren.wav` when your face has been gone 1.5s, repeats every 2.5s, stops when you return
-- `overlay.py` — draws fps, face count and away-timer on the canvas. press `o` to toggle
-
-## tests
+**context fields:** `log`, `frame`, `gray (grayscale frame)`, `canvas`, `faces`, `boxes`, `win_w`, `win_h`, `eyes`, `key`
 
 
-;;todo dodac wiecej testow zeby nie musiec odpalac glownej logiki aby testowac dane funckje
+### example addons:
 
+| addon | what it does |
+|---|---|
+| ~~`siren.py`~~ | ~~plays a siren after your face is gone 1.5 s, repeats every 2.5 s, stops when you return~~ removed. |
+| `overlay.py` | draws fps, face count and away-timer on the canvas press `o` to toggle |
+
+**Example:**
+
+```python
+# addons/example.py
+NAME = "example"
+ENABLED = True
+
+def on_face_lost(c):
+    c.log("son come back")
+
+def on_face_found(c):
+    c.log("hi bro ur back")
 ```
-python tests/cascade.test.py
-python tests/eye.test.py
-python tests/rendering.test.py
-```
+
 
 ## docker
 
-build the image:
+```sh
+# build
+build.bat          # windows
+./build.sh         # linux / mac
 
-windows:
-
-```
-build.bat
-```
-linux / mac:
-
-```
-./build.sh
-```
-
-windows, linux & mac
-```
+# run
 docker run --rm -it tracker
 ```
 
-;;todo naprawic aby docker na linux poprawnie wykrywal kamerke
-
-
-on windows/mac, docker cannot access the host webcam directly without extra setup (virutal cam bridge), best to run without the docker container.
-
-
-- q / esc — quit
-- f — toggle webcam preview inset
-- o — toggle the stats overlay (overlay addon)
-- if no cascade file is found locally, the app will attempt to download one
+> on docker cannot access the host webcam without a virtual camera bridge.
