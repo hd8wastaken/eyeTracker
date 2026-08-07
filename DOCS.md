@@ -13,7 +13,7 @@ everything you need to write, configure and debug addons for iTrack.
 - [how addons work](#how-addons-work)
 - [file structure](#file-structure)
 - [hooks reference](#hooks-reference)
-- [ctx object reference](#ctx-object-reference)
+- [context object reference](#ctx-object-reference)
 - [module-level fields](#module-level-fields)
 - [writing your first addon](#writing-your-first-addon)
 - [keeping state between frames](#keeping-state-between-frames)
@@ -49,21 +49,20 @@ it will not crash the tracker or skip other addons.
 
 ```
 addons/
-├── loader.py        ← the engine, do not edit unless you know what you're doing
-├── siren.py         ← bundled: face-lost alarm
-├── overlay.py       ← bundled: fps / face count overlay
-└── your_addon.py    ← drop yours here
+├── loader.py        the engine, do not edit unless you know what you're doing
+├── siren.py         bundled: face-lost alarm
+├── overlay.py       bundled: fps / face count overlay
+└── your_addon.py    drop yours here
 ```
 
-your addon is just a plain `.py` file. no class needed, no base class to inherit from. module-level
-functions with the right names are all it takes.
+your addon is just a plain `.py` file. no class needed, no base class to inherit from. 
 
 ---
 
 ## hooks reference
 
 all hooks are **optional**. define only what you need. every hook receives one positional argument
-the `ctx` object (described in the next section).
+the `ctx` (context) object (described in the next section).
 
 ---
 
@@ -130,9 +129,6 @@ def on_face_found(c):
 
 fires every frame where **no face** was detected.
 
-same caveat: fires every no-face frame, not just on the transition. use a timestamp or flag to
-distinguish "just lost" from "still lost".
-
 ```python
 import time
 _lost_at = None
@@ -140,7 +136,7 @@ _lost_at = None
 def on_face_lost(c):
     global _lost_at
     if _lost_at is None:
-        _lost_at = time.time()
+module-level        _lost_at = time.time()
         c.log("face just disappeared")
     else:
         c.log(f"still missing for {time.time() - _lost_at:.1f}s")
