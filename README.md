@@ -11,8 +11,7 @@
 
 <br/>
 
-**a python webcam eye tracker.**
-detects your face and moves a robotic eye to follow you in real time.
+**a python webcam face tracker.**
 
 </div>
 
@@ -70,7 +69,7 @@ define any of these hooks (all optional, all receive a single `ctx` object):
 set `ENABLED = False` at the top of an addon to disable it without deleting it.
 an addon that raises is logged and the app keeps running.
 
-→ full addon docs in [DOCS.md](DOCS.md)
+Documentation: [DOCS.md](DOCS.md)
 
 ### example addons
 
