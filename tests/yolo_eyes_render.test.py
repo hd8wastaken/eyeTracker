@@ -5,7 +5,7 @@ import time
 import sys
 import os
 
-print("yolo eye render test blue iris pupil should sweep in a circle. press q to close.")
+print("render test pupil. press q to close.")
 
 win_w, win_h = 900, 500
 er = 110
@@ -48,4 +48,4 @@ while True:
         break
 
 cv2.destroyAllWindows()
-print("PASS: blue pupil moved and stayed within bounds.")
+print("PASS: pupil moved and stayed within bounds.")

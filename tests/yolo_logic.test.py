@@ -5,7 +5,7 @@ import time
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, _ROOT)
 
-print("testing yolo logic classes (no camera, no model)...")
+print("testing yolo classes (no camera, no model)...")
 
 sys.path.insert(0, os.path.join(_ROOT, "src", "yolo"))
 
