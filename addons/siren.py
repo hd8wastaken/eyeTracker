@@ -6,7 +6,7 @@ import winsound
 import random
 
 NAME = "siren"
-ENABLED = True
+ENABLED = False
 
 
 _last_face_time = time.time()

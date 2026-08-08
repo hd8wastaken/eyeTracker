@@ -14,8 +14,9 @@ from addons.loader import AddonManager, ctx
 
 try:
     from colorama import init, Fore, Style
-    init(autoreset=True)
+    init(autoreset=True) # colorama init. > create Fore, Style.
 except ImportError:
+
     class _fake:
         def __getattr__(self, n): return ""
     Fore = _fake(); Style = _fake()
@@ -57,6 +58,7 @@ def pick_cam():
     print(f"{Fore.CYAN}cams: {found}{Style.RESET_ALL}")
     while True:
         c = input("pick cam index: ").strip()
+        
         if c.isdigit() and int(c) in found:
             return int(c)
 
@@ -141,7 +143,7 @@ def main():
 
     logr("loading yolo face model...", Fore.YELLOW)
     try:
-        model = _YOLO(os.path.join(_HERE, "model.pt"))
+        model = _YOLO("yolo26n-face.pt")
         model.fuse()
     except Exception as e:
         logr(f"fatal: {e}", Fore.RED)

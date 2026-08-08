@@ -9,7 +9,7 @@ NAME = "webserver"
 ENABLED = True
 
 PORT = 5000
-OPEN_BROWSER = True
+OPEN_BROWSER = False
 
 _clients = []
 _clients_lock = threading.Lock()
