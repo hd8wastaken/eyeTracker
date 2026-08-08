@@ -1,6 +1,6 @@
 <div align="center">
 
-# iTrack™
+# itrack
 
 <img src="https://img.shields.io/badge/Python-3.9+-FFD43B?style=for-the-badge&logo=python&logoColor=blue"/>
 <img src="https://img.shields.io/badge/YOLOv8-ultralytics-00ADEF?style=for-the-badge"/>
