@@ -181,4 +181,4 @@ if your addon is missing: `no hooks` means a typo in a function name, `disabled`
 | `c.canvas = new_array` | mutate in place with cv2 drawing calls |
 | blocking in a hook | run heavy work in a daemon thread |
 | `c.key` in `on_frame` | only valid in `on_key`, -1 everywhere else |
-| expecting `on_face_lost` only once | fires every no-face frame — use a flag for edge detection |
+| expecting `on_face_lost` only once | fires every "no-face" frame. use a flag for edge detection |
