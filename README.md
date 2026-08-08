@@ -48,7 +48,7 @@ to run:
 
 ---
 
-## differences from the cascade version
+## Haar Cascade (frontalface) version
 
 | feature | cascade | yolo |
 |---|---|---|
