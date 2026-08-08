@@ -9,5 +9,6 @@ documents/readme-old.md
 
 
 # models
-src/haarcascade_frontalface_default.xml
+*.pt
+#src/haarcascade_frontalface_default.xml
 #src/models/08052026.xml # (Fallback model)
