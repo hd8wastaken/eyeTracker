@@ -57,8 +57,8 @@ class AddonManager:
                 continue
 
             self.addons.append(mod)
-            hooks = [h for h in hooks if hasattr(mod, h)]
-            self.log(f"addons: loaded {mod.NAME} [{', '.join(hooks)}]")
+            pulls = [h for h in hooks if hasattr(mod, h)]
+            self.log(f"addons: loaded {mod.NAME} [{', '.join(pulls)}]")
 
         self.log(f"addons: {len(self.addons)} active")
 

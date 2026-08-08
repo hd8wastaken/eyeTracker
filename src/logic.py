@@ -89,7 +89,7 @@ class eye:
         # limbal ring
         cv2.circle(canvas, (cx, cy), r, (30, 30, 30), 3, cv2.LINE_AA)
 
-        # iris — solid blue (BGR: high B, medium G, low R)
+        # blue (BGR: high B, medium G, low R)
         cv2.circle(canvas, (px, py), pr + 5, (200, 130, 50), -1, cv2.LINE_AA)
 
         # pupil
