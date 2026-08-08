@@ -4,7 +4,7 @@ import types
 import importlib.util
 import traceback
 
-HOOKS = (
+hooks = (
     "on_start",
     "on_frame",
     "on_face_found",
@@ -52,12 +52,12 @@ class AddonManager:
                 continue
 
             mod.NAME = getattr(mod, "NAME", fn[:-3])
-            if not any(hasattr(mod, h) for h in HOOKS):
+            if not any(hasattr(mod, h) for h in hooks):
                 self.log(f"addons: skipping {fn} (no hooks)")
                 continue
 
             self.addons.append(mod)
-            hooks = [h for h in HOOKS if hasattr(mod, h)]
+            hooks = [h for h in hooks if hasattr(mod, h)]
             self.log(f"addons: loaded {mod.NAME} [{', '.join(hooks)}]")
 
         self.log(f"addons: {len(self.addons)} active")
